@@ -1,20 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-    
-    <!--Includes con los fragmentos para validar los datos del formulario-->
     @include('fragments.validation-error')
     @include('fragments.session')
 
-    <!--Muestra el formulario-->
     <div class="container mt-5">
-    <h2 style="color: rgb(40, 185, 201)">Crear Proyecto</h2>
-    <form action="{{route('proyecto.store')}}" method="POST">
+    <h2 style="color: rgb(192, 213, 34)">Editar Post</h2>
+    <form action="{{route('proyecto.update', $proyecto->id)}}" method="POST">
+        @method('PUT')
         @include('dashboard.proyecto._form')
     </form>
     </div>
     <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
+        document.addEventListener('DOMContentLoaded', (event) => {
         const subtotalInput = document.getElementById('subtotal');
         const ivaInput = document.getElementById('iva');
         const totalInput = document.getElementById('total');
@@ -39,7 +37,7 @@
             totalInput.value = total.toFixed(2);
         }
 
-        // Event listener para los cambios en subtotal
+         // Event listener para los cambios en subtotal
         subtotalInput.addEventListener('input', () => {
             const subtotal = parseFloat(subtotalInput.value) || 0;
             const iva = calculateIVA(subtotal, ivaRate);
