@@ -6,8 +6,12 @@ use Illuminate\Http\Request;
 
 class ProyectoController extends Controller
 {
-    //
     public function index(){
-        echo "Hola Mundo Como estan?";
+        return view('dashboard.proyecto.proyecto');
+    }
+
+    public function home(){
+        return view('Welcome');
     }
 }
+
