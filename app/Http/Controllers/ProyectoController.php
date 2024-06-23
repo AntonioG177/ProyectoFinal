@@ -11,7 +11,11 @@ class ProyectoController extends Controller
     }
 
     public function home(){
-        return view('Welcome');
+        return view('dashboard.home');
+    }
+
+    public function create(){
+        return view('dashboard.proyecto.create');
     }
 }
 

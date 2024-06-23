@@ -52,6 +52,7 @@ class RegisterController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role_checkbox' => ['nullable', 'boolean'],
         ]);
     }
 
@@ -63,10 +64,14 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        // Verifica si el checkbox 'role_checkbox' está presente y es verdadero
+        $role_id = isset($data['role_checkbox']) && $data['role_checkbox'] ? 1 : 2;
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'role_id' => $role_id,
         ]);
     }
 }
