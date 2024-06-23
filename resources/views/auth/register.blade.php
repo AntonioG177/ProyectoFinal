@@ -61,6 +61,14 @@
                             </div>
                         </div>
 
+                        <div class="row mb-3">
+                            <label class="form-check-label col-md-4 col-form-label text-md-end" for="role_checkbox">Administrador</label>
+
+                            <div class="col-md-6">
+                                <input id="role_checkbox" type="checkbox" class="form-check-input" name="role_checkbox" value="1">
+                            </div>
+                        </div>
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">

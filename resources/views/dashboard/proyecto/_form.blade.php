@@ -30,20 +30,20 @@
         <textarea class="form-control" id="comentarios_adicionales" name="comentarios_adicionales" placeholder="Agregar comentario adicional" rows="3">{{ old('comentarios_adicionales', $proyecto->comentarios_adicionales) }}</textarea>
     </div>
     <div class="mb-3">
-        <label for="cliente" class="form-label">RFC Cliente</label>
+        <label for="cliente" class="form-label">Cliente</label>
         <select class="form-select" aria-label="cliente" name="cliente_id">
         <option value="">Seleccione{{ old('cliente', $proyecto->cliente) }}</option>
         @foreach ($clientes as $cliente)
-        <option value="{{ $cliente->id }}" {{ $cliente->id == old('cliente_id', $proyecto->cliente_id) ? 'selected' : '' }}>{{ $cliente->rfc }}</option>
+        <option value="{{ $cliente->id }}" {{ $cliente->id == old('cliente_id', $proyecto->cliente_id) ? 'selected' : '' }}>{{ $cliente->razon_social }}</option>
         @endforeach
         </select>
     </div>    
     <div class="mb-3">
-        <label for="proveedor" class="form-label">RFC Proveedor</label>
+        <label for="proveedor" class="form-label">Proveedor</label>
         <select class="form-select" aria-label="proveedor" name="proveedor_id">
         <option value="">Seleccione {{ old('proveedor', $proyecto->proveedor) }}</option>
         @foreach ($proveedores as $proveedor)
-        <option value="{{ $proveedor->id }}" {{ $proveedor->id == old('proveedor_id', $proyecto->proveedor_id) ? 'selected' : '' }}>{{ $proveedor->rfc }}</option>
+        <option value="{{ $proveedor->id }}" {{ $proveedor->id == old('proveedor_id', $proyecto->proveedor_id) ? 'selected' : '' }}>{{ $proveedor->razon_social }}</option>
         @endforeach
         </select>
     </div>  

@@ -17,9 +17,10 @@ class ClienteFactory extends Factory
     public function definition(): array
     {
         // Elegir aleatoriamente entre 'Persona Física' y 'Persona Moral'
-        $persona = $this->faker->randomElement(['Persona Física', 'Persona Moral']);
+        $tipo = $this->faker->randomElement(['Persona Física', 'Persona Moral']);
         return [
-            'razon_social' => $persona,
+            'razon_social' => $this->faker->company,
+            'tipo'=> $tipo,
             'rfc' => strtoupper($this->faker->unique()->regexify('[A-Za-z0-9]{13}')), // 13 caracteres alfanuméricos
             'domicilio_fiscal' => $this->faker->text(50), // Limitado a 50 caracteres
             'email' => $this->faker->unique()->safeEmail, // Normalmente está bien, ya que los emails no suelen exceder 25 caracteres

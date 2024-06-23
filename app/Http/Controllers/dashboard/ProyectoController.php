@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\AdminAuthenticate;
 use App\Http\Requests\ProyectoRequest;
 use App\Models\Cliente;
 use App\Models\Proveedor;
@@ -12,12 +13,34 @@ use Illuminate\Http\Request;
 class ProyectoController extends Controller
 {
 
+    public function __construct() {
+        //$this->middleware(AdminAuthenticate::class);
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        // Realizar la consulta con joins
+        $proyectos = Proyecto::join('clientes', 'clientes.id', '=', 'proyecto.cliente_id')
+        ->join('proveedors', 'proveedors.id', '=', 'proyecto.proveedor_id')
+        ->select(
+            'proyecto.id', 
+            'proyecto.nombre', 
+            'proyecto.fecha_inicio_proyecto', 
+            'proyecto.subtotal', 
+            'proyecto.iva', 
+            'proyecto.total', 
+            'proyecto.concepto', 
+            'proyecto.comentarios_adicionales',
+            'clientes.razon_social as cliente_razon_social',
+            'proveedors.razon_social as proveedor_razon_social'
+        )
+        ->orderBy('proyecto.fecha_inicio_proyecto', 'desc')
+        ->paginate(10);
+
+        return view('dashboard.proyecto.proyecto', ['proyectos' => $proyectos]);
     }
 
     /**
@@ -99,9 +122,11 @@ class ProyectoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Proyecto $proyecto)
     {
-        //
+        $proyecto->delete();
+        
+        return back()->with('status','Proyecto eliminado correctamente');
     }
     
 }

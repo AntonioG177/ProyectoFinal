@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('clientes', function (Blueprint $table) {
             $table->id();
             $table->string('razon_social');
+            $table->string('tipo');
             $table->string('rfc')->unique();
             $table->string('domicilio_fiscal', 100);
             $table->string('email', 50)->unique();
